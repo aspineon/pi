@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  pi:
+    image: "nielsutrecht/pi:${TAG}"
+    networks:
+      - web
+    labels:
+      - "traefik.backend=pi"
+      - "traefik.frontend.rule=Host: pi.localhost, pi.niels.nu"
+      - "traefik.port=80"
+
+networks:
+  web:
+    external:
+      name: traefik_webgateway
